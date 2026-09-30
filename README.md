@@ -1,6 +1,6 @@
-# eirworks/carol
+# Carol search engine core
 
-The search engine core extracted from the Ion4 application: an RSS/Atom crawler,
+The search engine core extracted from the older laravel application: an RSS/Atom crawler,
 its feed parsing library, the `search_items` database layer and the feed source
 resources.
 
@@ -15,7 +15,7 @@ then require the package normally.
 ```json
 {
     "repositories": [
-        { "type": "vcs", "url": "https://github.com/eirworks/carol" }
+        { "type": "vcs", "url": "https://github.com/eirworks/carol-se" }
     ],
     "require": {
         "eirworks/carol": "dev-main"

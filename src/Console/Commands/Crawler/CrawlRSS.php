@@ -57,12 +57,18 @@ class CrawlRSS extends Command
 
                 $this->line("|- Crawling RSS from {$source['url']}");
                 try {
-                    $content = Http::get($source['url'])->body();
-                    Cache::put('rss_' . $md5SourceUrl, $content, $this->cacheTtl());
+                    $content = Http::get($source['url'])->throw()->body();
                 } catch (\Exception $e) {
                     $this->error("|- Failed to crawl RSS from {$source['url']}: " . $e->getMessage());
                     continue;
                 }
+
+                if (trim($content) === '') {
+                    $this->error("|- Received an empty feed from {$source['url']}, skipping.");
+                    continue;
+                }
+
+                Cache::put('rss_' . $md5SourceUrl, $content, $this->cacheTtl());
             } else {
                 $this->line('|- Content retrieved from cache');
             }
@@ -82,6 +88,9 @@ class CrawlRSS extends Command
                     SearchItem::query()->insert($result);
                 }
             } catch (\Exception $e) {
+                // A previously cached error page would otherwise keep failing forever.
+                Cache::forget('rss_' . $md5SourceUrl);
+
                 $this->error("|- Unable to process result: {$e->getMessage()}");
             }
         }

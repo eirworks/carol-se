@@ -60,19 +60,42 @@ class CrawlYoutube extends Command
         $this->line("|- Channel ID: {$channel['channel']}");
         $this->line("|- Channel URL: {$channelUrl}");
 
-        $channelHash = md5($channel['channel']);
-        $content = Cache::get('youtube_' . $channelHash);
+        $cacheKey = 'youtube_' . md5($channel['channel']);
+        $content = Cache::get($cacheKey);
 
         if (! $content) {
             $this->warn('|- Content not available in cache');
             $this->line('|- Crawling RSS...');
-            $content = Http::get($channelUrl)->body();
-            Cache::put('youtube_' . $channelHash, $content, now()->addHours((int) config('carol.cache.ttl', 6)));
+
+            try {
+                $content = Http::get($channelUrl)->throw()->body();
+            } catch (\Exception $e) {
+                $this->error("|- Failed to crawl channel feed: {$e->getMessage()}");
+
+                return;
+            }
+
+            if (trim($content) === '') {
+                $this->error('|- Received an empty feed, skipping.');
+
+                return;
+            }
+
+            Cache::put($cacheKey, $content, now()->addHours((int) config('carol.cache.ttl', 6)));
         } else {
             $this->line('|- Content retrieved from cache');
         }
 
-        $searchItems = $this->rssParser->rssToSearchItem($content);
+        try {
+            $searchItems = $this->rssParser->rssToSearchItem($content);
+        } catch (\Exception $e) {
+            // A previously cached error page would otherwise keep failing forever.
+            Cache::forget($cacheKey);
+
+            $this->error("|- Unable to process result: {$e->getMessage()}");
+
+            return;
+        }
 
         foreach ($searchItems as $result) {
             $result['created_at'] = now()->toDateTimeString();

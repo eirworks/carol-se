@@ -109,6 +109,54 @@ return [
         'lang' => 'id'
     ],
     [
+        'name' => 'Democrazy',
+        'url' => 'https://democrazy.id/feed/',
+        'topic' => 'politics',
+        'lang' => 'id'
+    ],
+    [
+        'name' => 'Liputan 6',
+        'url' => 'https://feed.liputan6.com/rss/news',
+        'topic' => 'news',
+        'lang' => 'id'
+    ],
+    [
+        'name' => 'Liputan 6',
+        'url' => 'https://feed.liputan6.com/rss/bisnis',
+        'topic' => 'business',
+        'lang' => 'id'
+    ],
+    [
+        'name' => 'Liputan 6',
+        'url' => 'https://feed.liputan6.com/rss/showbiz',
+        'topic' => 'entertainment',
+        'lang' => 'id'
+    ],
+    [
+        'name' => 'Liputan 6',
+        'url' => 'https://feed.liputan6.com/rss/bola',
+        'topic' => 'sport',
+        'lang' => 'id'
+    ],
+    [
+        'name' => 'City Guide 911 FM',
+        'url' => 'https://cityguide911fm.com/feed/',
+        'topic' => 'news',
+        'lang' => 'id'
+    ],
+    [
+        'name' => 'Ini Gresik',
+        'url' => 'https://inigresik.com/feed/',
+        'topic' => 'local',
+        'lang' => 'id'
+    ],
+    [
+        'name' => 'Media Indonesia',
+        'url' => 'https://mediaindonesia.com/feed/all',
+        'topic' => 'news',
+        'lang' => 'id'
+    ],
+    [
         'name' => 'Buzzfeed Shopping',
         'url' => 'https://www.buzzfeed.com/shopping.xml',
         'topic' => 'shopping'
@@ -132,5 +180,35 @@ return [
         'name' => 'Gamespot Entertainment',
         'url' => 'https://www.gamespot.com/feeds/entertainment-news',
         'topic' => 'entertainment'
-    ]
+    ],
+    [
+        'name' => 'Humble Bundle',
+        'url' => 'https://blog.humblebundle.com/feed/',
+        'topic' => 'games'
+    ],
+    [
+        'name' => 'All Recipes',
+        'url' => 'https://feeds-api.dotdashmeredith.com/v1/rss/google/b41abeb9-87a0-4c32-b4db-c8d3f41e7934',
+        'topic' => 'food'
+    ],
+    [
+        'name' => 'SearchEngineLand',
+        'url' => 'https://searchengineland.com/feed',
+        'topic' => 'technology'
+    ],
+    [
+        'name' => 'Ubuntu Blog',
+        'url' => 'https://ubuntu.com/blog/feed',
+        'topic' => 'technology'
+    ],
+    [
+        'name' => 'Tecmint: Linux Howtos, Tutorials & Guides',
+        'url' => 'https://www.tecmint.com/feed/',
+        'topic' => 'technology'
+    ],
+    [
+        'name' => 'Ruby on Rails',
+        'url' => 'https://rubyonrails.org/feed.xml',
+        'topic' => 'technology'
+    ],
 ];
